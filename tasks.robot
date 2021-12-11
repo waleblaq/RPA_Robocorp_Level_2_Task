@@ -90,7 +90,7 @@ Add screenshot to pdf
 
 *** Keywords ***
 Creating Zip Archive
-    Archive Folder With Zip    ${CURDIR}${/}output${/}receipts    receipts.zip
+    Archive Folder With Zip    ${CURDIR}${/}output${/}receipts    ${CURDIR}${/}output${/}receipts.zip
 
 *** Tasks ***
 Robort for ordering a robort
