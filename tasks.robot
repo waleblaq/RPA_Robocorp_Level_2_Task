@@ -62,8 +62,10 @@ Take screenshot
 *** Keywords ***
 Save reciept
     [Arguments]     ${order}
+    #Set Local Variable    ${OrderNumber}    ${order}[Order number]
     ${receipt_html}=   Get Element Attribute    receipt    outerHTML
-    Html To Pdf    ${receipt_html}    ${CURDIR}${/}output${/}receipt.pdf
+    #Set Local Variable    ${path_receipt}       ${CURDIR}${/}receipts${/}OrderNumber_${OrderNumber}.pdf
+    Html To Pdf    ${receipt_html}    ${CURDIR}${/}receipts${/}OrderNumber_${order}[Order number].pdf
     Add screenshot to pdf   ${order}
 
 *** Keywords ***
@@ -83,14 +85,14 @@ Fill the form using the data from the CSV file
 *** Keywords ***
 Add screenshot to pdf
         [Arguments]     ${order}
-        Open Pdf   ${CURDIR}${/}output${/}receipts${/}order_${order}[Order number]_receipt.pdf
-        Add Watermark Image To Pdf    Preview.png    ${CURDIR}${/}output${/}receipts${/}order_${order}[Order number]_receipt.pdf
-        Close Pdf   ${CURDIR}${/}output${/}receipts${/}order_${order}[Order number]_receipt.pdf
+        Open Pdf   ${CURDIR}${/}receipts${/}OrderNumber_${order}[Order number].pdf
+        Add Watermark Image To Pdf    Preview.png    ${CURDIR}${/}receipts${/}OrderNumber_${order}[Order number].pdf
+        Close Pdf   ${CURDIR}${/}receipts${/}OrderNumber_${order}[Order number].pdf
 
 
 *** Keywords ***
 Creating Zip Archive
-    Archive Folder With Zip    ${CURDIR}${/}output${/}receipts    ${CURDIR}${/}output${/}receipts.zip
+    Archive Folder With Zip    ${CURDIR}${/}receipts    ${CURDIR}${/}output${/}receipts.zip
 
 *** Tasks ***
 Robort for ordering a robort
