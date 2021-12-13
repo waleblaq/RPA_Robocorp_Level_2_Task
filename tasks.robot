@@ -32,9 +32,9 @@ Give consent.
 
 *** Keywords ***
 Download The CSV File
-    [Arguments]     ${result}
-    Convert To String    ${result}
-    Download    ${result}   overwrite=True
+    [Arguments]     ${order_path}
+    Convert To String    ${order_path}
+    Download   ${order_path}  overwrite=True
 
 
 *** Keywords ***
@@ -94,8 +94,9 @@ Creating Zip Archive
 
 *** Tasks ***
 Robort for ordering a robort
-    Collect order location
     Open the intranet website
+    ${order_path} =  Collect order location
+    Download The CSV File  ${order_path}
     Give consent.
     Fill the form using the data from the CSV file
     Creating Zip Archive
